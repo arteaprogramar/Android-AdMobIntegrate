@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Margins, Paddings -->
+    <dimen name="adt_padding">2dp</dimen>
+    <dimen name="adt_no_margin">0dp</dimen>
+    <dimen name="adt_no_size">0dp</dimen>
+    <dimen name="adt_default_margin">10dp</dimen>
+    <dimen name="adt_gutter_horizontal">4dp</dimen>
+    <dimen name="adt_gutter_vertical">8dp</dimen>
+
+    <!-- Text Size -->
+    <dimen name="adt_text_size_small">12sp</dimen>
+    <dimen name="adt_text_size_large">15sp</dimen>
+    <item name="adt_text_row_weight" format="float" type="dimen">0.25</item>
+
+    <!-- Ad Indicator -->
+    <dimen name="adt_ad_indicator_text_size">10sp</dimen>
+    <dimen name="adt_ad_indicator_width">25dp</dimen>
+    <dimen name="adt_ad_indicator_height">20dp</dimen>
+
+    <!-- ImageView -->
+    <dimen name="adt_media_height">200dp</dimen>
+    <dimen name="adt_image_size">140dp</dimen>
+    <dimen name="adt_image_medium_land">75dp</dimen>
+    <dimen name="adt_image_medium_size">75dp</dimen>
+
+</resources>

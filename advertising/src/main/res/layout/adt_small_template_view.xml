@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.gms.ads.formats.UnifiedNativeAdView
+        android:id="@+id/native_ad_view"
+        style="@style/AdtTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/adt_rounded_corners_shape"
+            android:orientation="vertical"
+            android:padding="@dimen/adt_default_margin">
+
+            <RelativeLayout
+                android:id="@+id/background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="@dimen/adt_image_size"
+                    android:layout_height="@dimen/adt_image_size"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="@dimen/adt_gutter_horizontal"
+                    android:layout_marginRight="@dimen/adt_gutter_horizontal"
+                    android:contentDescription="@android:string/yes"
+                    android:scaleType="centerCrop" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/adt_gutter_vertical"
+                    android:layout_marginLeft="@dimen/adt_gutter_vertical"
+                    android:layout_marginEnd="@dimen/adt_gutter_vertical"
+                    android:layout_marginRight="@dimen/adt_gutter_vertical"
+                    android:layout_toEndOf="@id/icon"
+                    android:layout_toRightOf="@id/icon"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/primary"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/adt_no_margin"
+                        android:layout_marginTop="@dimen/adt_no_margin"
+                        android:layout_marginEnd="@dimen/adt_no_margin"
+                        android:layout_marginBottom="@dimen/adt_gutter_vertical"
+                        android:layout_weight="@dimen/adt_text_row_weight"
+                        android:textSize="@dimen/adt_text_size_large"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/adt_gutter_vertical"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/ad_notification_view"
+                            android:layout_width="@dimen/adt_ad_indicator_width"
+                            android:layout_height="@dimen/adt_ad_indicator_height"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/adt_gutter_horizontal"
+                            android:layout_marginRight="@dimen/adt_gutter_horizontal"
+                            android:background="@drawable/adt_rounded_corners_shape"
+                            android:gravity="center"
+                            android:text="Ad"
+                            android:textSize="@dimen/adt_ad_indicator_text_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/secondary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@id/ad_notification_view"
+                            android:layout_toRightOf="@id/ad_notification_view"
+                            android:textSize="@dimen/adt_text_size_small" />
+
+                    </RelativeLayout>
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        style="@style/Widget.AppCompat.RatingBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/ad_notification_view"
+                        android:numStars="5"
+                        android:textSize="@dimen/adt_text_size_small"
+                        android:visibility="gone" />
+
+                    <Button
+                        android:id="@+id/cta"
+                        style="@style/AdtButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:theme="@style/AdtButtonStyle" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.gms.ads.formats.UnifiedNativeAdView>
+
+</merge>

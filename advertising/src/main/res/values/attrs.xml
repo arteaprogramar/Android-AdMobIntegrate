@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="AdNativeView">
+        <attr name="adt_template" format="reference" />
+        <attr name="adt_icon" format="reference" />
+        <attr name="adt_title" format="string" />
+        <attr name="adt_subtitle" format="string" />
+        <attr name="adt_text_button" format="string" />
+        <attr name="adt_cover" format="reference" />
+    </declare-styleable>
+</resources>

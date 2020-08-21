@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.library'
+    id 'com.jfrog.bintray' version '1.8.5'
+    id 'maven-publish'
+}
+
+group = 'arte.programar'
+version = '1.0.0'
+
+// Use ./gradlew bintrayUpload to upload
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    publications = ['release']
+
+    pkg {
+        repo = 'Android'
+        name = 'arte.programar.advertising'
+        licenses = ["Apache-2.0"]
+        vcsUrl = 'https://github.com/arteaprogramar/Android-AdNative.git'
+        websiteUrl = 'https://github.com/arteaprogramar/Android-AdNative'
+
+        version {
+            name = project.version
+        }
+    }
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            distribution 'repo'
+        }
+    }
+
+    scm {
+        url 'https://github.com/arteaprogramar/Android-AdNative'
+    }
+}
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                artifact sourceJar
+                groupId group
+                artifactId 'advertising'
+                version version
+                pom.withXml {
+                    def root = asNode()
+                    root.appendNode('description', 'Android AdNative Templates')
+                    root.appendNode('name', 'AdNative Custom')
+                    root.appendNode('url', 'https://github.com/arteaprogramar/Android-AdNative')
+                    root.children().last() + pomConfig
+                }
+            }
+        }
+    }
+}
+
+android {
+    compileSdkVersion 30
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        resourcePrefix 'adt_'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // Android Library
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    // Extra library
+    implementation 'com.novoda:merlin:1.2.0'
+}

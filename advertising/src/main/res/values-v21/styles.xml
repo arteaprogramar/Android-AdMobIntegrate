@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Button Style -->
+    <style name="AdtButtonStyle" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="colorPrimary">@color/adt_ad_green</item>
+        <item name="android:colorButtonNormal">@color/adt_ad_green</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

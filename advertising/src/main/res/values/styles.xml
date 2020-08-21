@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Style -->
+    <style name="AdtTheme">
+        <!-- Background -->
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:colorBackground">?android:colorBackground</item>
+
+        <!-- TextColor -->
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:textColorPrimary">@android:color/background_dark</item>
+    </style>
+
+    <!-- Button Style -->
+    <style name="AdtButtonStyle" parent="@style/Widget.AppCompat.Button.Colored">
+        <item name="colorPrimary">@color/adt_ad_green</item>
+        <item name="colorButtonNormal">@color/adt_ad_green</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

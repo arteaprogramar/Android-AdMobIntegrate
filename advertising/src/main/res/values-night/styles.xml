@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Style -->
+    <style name="AdtTheme">
+        <!-- Background -->
+        <item name="android:windowBackground">?android:colorBackground</item>
+        <item name="android:colorBackground">?android:colorBackground</item>
+
+        <!-- TextColor -->
+        <item name="android:textColor">@android:color/background_light</item>
+        <item name="android:textColorPrimary">@android:color/background_light</item>
+    </style>
+
+</resources>
