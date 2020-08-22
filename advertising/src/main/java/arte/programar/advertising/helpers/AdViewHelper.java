@@ -36,7 +36,7 @@ public class AdViewHelper {
      * @param adKey
      * @param request
      */
-    public AdViewHelper(Context context, String adKey, AdRequest request){
+    public AdViewHelper(Context context, String adKey, AdRequest request) {
         this.mContext = context;
         this.mAdKey = adKey;
         this.mRequest = request;
@@ -57,15 +57,16 @@ public class AdViewHelper {
     }
 
     /**
-     *  Banner size according to Device Metrics and Screens Support
-     *  https://material.io/tools/devices/
-     *  https://developer.android.com/guide/practices/screens_support?hl=es-419#range
+     * Banner size according to Device Metrics and Screens Support
+     * https://material.io/tools/devices/
+     * https://developer.android.com/guide/practices/screens_support?hl=es-419#range
+     * <p>
+     * It is important to mention that the density of the screen (dp) is affected
+     * by the orientation and multi-window of the device.
      *
-     *  It is important to mention that the density of the screen (dp) is affected
-     *  by the orientation and multi-window of the device.
      * @return
      */
-    private AdSize getAdViewSize(){
+    private AdSize getAdViewSize() {
         DisplayMetrics metrics = mContext.getResources().getDisplayMetrics();
 
         int height = (int) (metrics.heightPixels / metrics.density + 0.5);

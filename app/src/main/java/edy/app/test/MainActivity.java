@@ -1,13 +1,12 @@
 package edy.app.test;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.google.android.gms.ads.MobileAds;
 import com.novoda.merlin.Connectable;
@@ -55,16 +54,16 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
     @Override
     protected Merlin createMerlin() {
         return new Merlin.Builder()
-            .withConnectableCallbacks()
-            .withDisconnectableCallbacks()
-            .build(getApplicationContext());
+                .withConnectableCallbacks()
+                .withDisconnectableCallbacks()
+                .build(getApplicationContext());
     }
 
-    private void nativeLoad(){
+    private void nativeLoad() {
         AdNativeHelper.show(mNativeView, ID_AD_NATIVE);
     }
 
-    private void adViewLoad(){
+    private void adViewLoad() {
         adViewHelper.create();
         mContent.post(new Runnable() {
             @Override
@@ -75,7 +74,7 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
         });
     }
 
-    private void interstitialLoad(){
+    private void interstitialLoad() {
         adInterstitialHelper.show();
     }
 

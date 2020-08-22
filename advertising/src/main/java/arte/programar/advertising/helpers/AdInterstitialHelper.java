@@ -13,6 +13,23 @@ public class AdInterstitialHelper extends AdListener {
 
     // Instance
     private static AdInterstitialHelper instance;
+    // Variables
+    private AdRequest mRequest;
+    private InterstitialAd mInterstitial;
+    private MutableLiveData<Boolean> showInterstitial = new MutableLiveData<>(false);
+
+    /**
+     * Constructor
+     *
+     * @param context
+     * @param adKey
+     * @param request
+     */
+    private AdInterstitialHelper(Context context, String adKey, AdRequest request) {
+        mRequest = request;
+        mInterstitial = new InterstitialAd(context);
+        mInterstitial.setAdUnitId(adKey);
+    }
 
     /**
      * Instance
@@ -35,6 +52,7 @@ public class AdInterstitialHelper extends AdListener {
 
     /**
      * Instance
+     *
      * @param context
      * @param adKey
      * @param request
@@ -52,28 +70,10 @@ public class AdInterstitialHelper extends AdListener {
         return instance;
     }
 
-    public static void destroyInstance(){
+    public static void destroyInstance() {
         if (instance != null) {
             instance = null;
         }
-    }
-
-    // Variables
-    private AdRequest mRequest;
-    private InterstitialAd mInterstitial;
-    private MutableLiveData<Boolean> showInterstitial = new MutableLiveData<>(false);
-
-    /**
-     * Constructor
-     *
-     * @param context
-     * @param adKey
-     * @param request
-     */
-    private AdInterstitialHelper(Context context, String adKey, AdRequest request){
-        mRequest = request;
-        mInterstitial = new InterstitialAd(context);
-        mInterstitial.setAdUnitId(adKey);
     }
 
     /**
