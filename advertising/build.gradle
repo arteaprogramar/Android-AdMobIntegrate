@@ -21,8 +21,8 @@ bintray {
         repo = 'Android'
         name = 'arte.programar.advertising'
         licenses = ["Apache-2.0"]
-        vcsUrl = 'https://github.com/arteaprogramar/Android-AdNative.git'
-        websiteUrl = 'https://github.com/arteaprogramar/Android-AdNative'
+        vcsUrl = 'https://github.com/arteaprogramar/Android-AdMobIntegrate.git'
+        websiteUrl = 'https://github.com/arteaprogramar/Android-AdMobIntegrate'
 
         version {
             name = project.version
@@ -40,7 +40,7 @@ def pomConfig = {
     }
 
     scm {
-        url 'https://github.com/arteaprogramar/Android-AdNative'
+        url 'https://github.com/arteaprogramar/Android-AdMobIntegrate'
     }
 }
 
@@ -60,9 +60,9 @@ afterEvaluate {
                 version version
                 pom.withXml {
                     def root = asNode()
-                    root.appendNode('description', 'Android AdNative Templates')
-                    root.appendNode('name', 'AdNative Custom')
-                    root.appendNode('url', 'https://github.com/arteaprogramar/Android-AdNative')
+                    root.appendNode('description', 'Android AdMob Integrate')
+                    root.appendNode('name', 'Android AdMob Integrate')
+                    root.appendNode('url', 'https://github.com/arteaprogramar/Android-AdMobIntegrate')
                     root.children().last() + pomConfig
                 }
             }

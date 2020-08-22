@@ -1,5 +1,7 @@
 ## Android Advertising Integrate
 
+[ ![Download](https://api.bintray.com/packages/arteaprogramar/Android/arte.programar.advertising/images/download.svg?version=1.0.0) ](https://bintray.com/arteaprogramar/Android/arte.programar.advertising/1.0.0/link)
+
 Admob integration in Android
 
 ## Objective
@@ -21,7 +23,7 @@ Include library in your project.
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     ...
-    
+    implementation 'arte.programar:advertising:1.0.0'
     implementation 'com.google.android.gms:play-services-ads:19.3.0'
     ...
 }
@@ -120,7 +122,7 @@ activity_main.xml
     app:adt_title="Eu eum facilisis voluptatum" />
 ```
 
-### Create AdNativeView
+### Create AdNative Medium Custom
 
 activity_main.xml
 ```
