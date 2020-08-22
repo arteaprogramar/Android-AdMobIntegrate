@@ -1,7 +1,6 @@
 ## Android Advertising Integrate
 
-[ ![Download](https://api.bintray.com/packages/arteaprogramar/Android/arte.programar.advertising/images/download.svg?version=1.0.0) ](https://bintray.com/arteaprogramar/Android/arte.programar.advertising/1.0.0/link)
-
+[ ![Download](https://api.bintray.com/packages/arteaprogramar/Android/arte.programar.advertising/images/download.svg?version=1.0.1) ](https://bintray.com/arteaprogramar/Android/arte.programar.advertising/1.0.1/link)
 Admob integration in Android
 
 ## Objective

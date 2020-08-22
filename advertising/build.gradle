@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'arte.programar'
-version = '1.0.0'
+version = '1.0.1'
 
 // Use ./gradlew bintrayUpload to upload
 Properties properties = new Properties()
