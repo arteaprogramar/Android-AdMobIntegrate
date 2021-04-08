@@ -1,73 +1,6 @@
 plugins {
     id 'com.android.library'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'maven-publish'
-}
-
-group = 'arte.programar'
-version = '1.0.1'
-
-// Use ./gradlew bintrayUpload to upload
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    publications = ['release']
-
-    pkg {
-        repo = 'Android'
-        name = 'arte.programar.advertising'
-        licenses = ["Apache-2.0"]
-        vcsUrl = 'https://github.com/arteaprogramar/Android-AdMobIntegrate.git'
-        websiteUrl = 'https://github.com/arteaprogramar/Android-AdMobIntegrate'
-
-        version {
-            name = project.version
-        }
-    }
-}
-
-def pomConfig = {
-    licenses {
-        license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            distribution 'repo'
-        }
-    }
-
-    scm {
-        url 'https://github.com/arteaprogramar/Android-AdMobIntegrate'
-    }
-}
-
-task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                artifact sourceJar
-                groupId group
-                artifactId 'advertising'
-                version version
-                pom.withXml {
-                    def root = asNode()
-                    root.appendNode('description', 'Android AdMob Integrate')
-                    root.appendNode('name', 'Android AdMob Integrate')
-                    root.appendNode('url', 'https://github.com/arteaprogramar/Android-AdMobIntegrate')
-                    root.children().last() + pomConfig
-                }
-            }
-        }
-    }
 }
 
 android {
@@ -76,7 +9,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName getVersionName()
         consumerProguardFiles "consumer-rules.pro"
     }
     buildTypes {
@@ -90,12 +23,54 @@ android {
     }
 }
 
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+
+Properties properties = new Properties()
+properties.load(new FileInputStream(rootProject.file('github.properties')))
+
+def getVersionName = { ->
+    return '2.2104.2'
+}
+
+def getArtificatId = { ->
+    return 'advertising'
+}
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'arte.programar'
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact sourceJar
+            artifact ("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+        }
+
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/arteaprogramar/Android-AdMobIntegrate")
+
+            credentials {
+                username = properties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = properties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // Android Library
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
-    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.3.1'
+    implementation 'com.google.android.gms:play-services-ads:19.8.0'
     // Extra library
     implementation 'com.novoda:merlin:1.2.0'
 }

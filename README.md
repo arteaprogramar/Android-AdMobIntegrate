@@ -1,8 +1,5 @@
 ## Android Advertising Integrate
 
-[ ![Download](https://api.bintray.com/packages/arteaprogramar/Android/arte.programar.advertising/images/download.svg?version=1.0.1) ](https://bintray.com/arteaprogramar/Android/arte.programar.advertising/1.0.1/link)
-Admob integration in Android
-
 ## Objective
 
 Facilitate implementation of "Google AdMob" advertising in an Android Application.
@@ -22,7 +19,7 @@ Include library in your project.
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     ...
-    implementation 'arte.programar:advertising:1.0.0'
+    implementation 'arte.programar:advertising:2.2104.2'
     implementation 'com.google.android.gms:play-services-ads:19.3.0'
     ...
 }

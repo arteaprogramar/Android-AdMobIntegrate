@@ -1,3 +1,2 @@
-include ':advertising'
-include ':app'
+include ':app', ':advertising'
 rootProject.name = "Android-AdMobIntegrate"

@@ -13,7 +13,6 @@ import com.novoda.merlin.Merlin;
 public abstract class ConnectionActivity extends AppCompatActivity {
     private static final String TAG = "arte.programar::".concat(ConnectionActivity.class.getSimpleName());
 
-
     // Merlin Variable
     protected Merlin merlin;
 
