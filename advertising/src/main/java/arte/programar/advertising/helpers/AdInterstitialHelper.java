@@ -1,106 +1,105 @@
 package arte.programar.advertising.helpers;
 
-import android.content.Context;
+import android.app.Activity;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
-public class AdInterstitialHelper extends AdListener {
+public class AdInterstitialHelper {
     private static final String TAG = "arte.programar::".concat(AdInterstitialHelper.class.getSimpleName());
 
-    // Instance
-    private static AdInterstitialHelper instance;
     // Variables
-    private AdRequest mRequest;
+    private final String mAdKey;
+    private final Activity mActivity;
+    private final AdRequest mRequest;
+    private final MutableLiveData<Boolean> showInterstitial = new MutableLiveData<>(false);
     private InterstitialAd mInterstitial;
-    private MutableLiveData<Boolean> showInterstitial = new MutableLiveData<>(false);
 
     /**
      * Constructor
      *
-     * @param context
+     * @param activity
      * @param adKey
-     * @param request
      */
-    private AdInterstitialHelper(Context context, String adKey, AdRequest request) {
-        mRequest = request;
-        mInterstitial = new InterstitialAd(context);
-        mInterstitial.setAdUnitId(adKey);
+    public AdInterstitialHelper(Activity activity, String adKey) {
+        this.mAdKey = adKey;
+        this.mActivity = activity;
+        this.mRequest = new AdRequest.Builder().build();
+
+        load();
     }
 
     /**
-     * Instance
-     *
-     * @param context
-     * @param adKey
-     * @return
+     * InterstitialAd load
      */
-    public static AdInterstitialHelper getInstance(Context context, String adKey) {
-        if (instance == null) {
-            synchronized (AdInterstitialHelper.class) {
-                if (instance == null) {
-                    instance = new AdInterstitialHelper(context, adKey, new AdRequest.Builder().build());
-                }
+    private void load() {
+        InterstitialAd.load(mActivity.getApplicationContext(), mAdKey, mRequest, new InterstitialAdLoadCallback() {
+
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                Log.d(TAG, "onAdLoaded()");
+                AdInterstitialHelper.this.mInterstitial = interstitialAd;
+                interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+
+                    @Override
+                    public void onAdDismissedFullScreenContent() {
+                        AdInterstitialHelper.this.mInterstitial = null;
+                        setShowInterstitial(false);
+                    }
+
+                    @Override
+                    public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
+                        AdInterstitialHelper.this.mInterstitial = null;
+                        setShowInterstitial(false);
+                    }
+
+                    @Override
+                    public void onAdShowedFullScreenContent() {
+                        Log.d(TAG, "onAdShowedFullScreenContent()");
+                    }
+
+                });
+
             }
-        }
 
-        return instance;
-    }
-
-    /**
-     * Instance
-     *
-     * @param context
-     * @param adKey
-     * @param request
-     * @return
-     */
-    public static AdInterstitialHelper getInstance(Context context, String adKey, AdRequest request) {
-        if (instance == null) {
-            synchronized (AdInterstitialHelper.class) {
-                if (instance == null) {
-                    instance = new AdInterstitialHelper(context, adKey, request);
-                }
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                Log.i(TAG, "onAdFailedToLoad() : ".concat(loadAdError.getMessage()));
+                Log.i(TAG, String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage()));
+                mInterstitial = null;
+                setShowInterstitial(false);
             }
-        }
 
-        return instance;
-    }
-
-    public static void destroyInstance() {
-        if (instance != null) {
-            instance = null;
-        }
+        });
     }
 
     /**
      * Interstitial Show
      */
-    public void show() {
+    public void showInterstitial() {
+        Log.d(TAG, "Interstital is ".concat(mInterstitial == null ? "null" : "is not null"));
+
         if (mInterstitial != null) {
-            mInterstitial.setAdListener(this);
-            mInterstitial.loadAd(mRequest);
+            mInterstitial.show(mActivity);
+            setShowInterstitial(true);
+        } else {
+            load();
         }
     }
 
-    @Override
-    public void onAdLoaded() {
-        if (mInterstitial != null) {
-            if (mInterstitial.isLoaded()) {
-                mInterstitial.show();
-                showInterstitial.postValue(true);
-            } else {
-                showInterstitial.postValue(false);
-            }
-        }
+    public MutableLiveData<Boolean> getShowInterstitial() {
+        return showInterstitial;
     }
 
-    @Override
-    public void onAdClosed() {
-        showInterstitial.postValue(false);
+    private void setShowInterstitial(Boolean isVisible) {
+        this.showInterstitial.postValue(isVisible);
     }
-
 }

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,10 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.ads.formats.MediaView;
-import com.google.android.gms.ads.formats.NativeAd.Image;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.google.android.gms.ads.nativead.MediaView;
+import com.google.android.gms.ads.nativead.NativeAd;
+import com.google.android.gms.ads.nativead.NativeAd.Image;
+import com.google.android.gms.ads.nativead.NativeAdView;
 
 
 /**
@@ -46,8 +47,8 @@ public class AdNativeView extends FrameLayout {
 
     // Variables
     private int templateType;
-    private UnifiedNativeAd nativeAd;
-    private UnifiedNativeAdView nativeAdView;
+    private NativeAd nativeAd;
+    private NativeAdView nativeAdView;
     private TextView primaryView;
     private TextView secondaryView;
     private RatingBar ratingBar;
@@ -56,6 +57,7 @@ public class AdNativeView extends FrameLayout {
     private MediaView mediaView;
     private Button callToActionView;
     private RelativeLayout background;
+    private TextView ad_notification;
 
 
     /**
@@ -110,7 +112,7 @@ public class AdNativeView extends FrameLayout {
      * @param nativeAd
      * @return
      */
-    public static boolean adHasOnlyStore(UnifiedNativeAd nativeAd) {
+    public static boolean adHasOnlyStore(NativeAd nativeAd) {
         String store = nativeAd.getStore();
         String advertiser = nativeAd.getAdvertiser();
         return !TextUtils.isEmpty(store) && TextUtils.isEmpty(advertiser);
@@ -276,6 +278,8 @@ public class AdNativeView extends FrameLayout {
         mediaView = findViewById(R.id.media_view);
         background = findViewById(R.id.background);
 
+        ad_notification = findViewById(R.id.ad_notification_view);
+
         // CustomViews
         iconView.setImageDrawable(adIcon);
         primaryView.setText(adTitle);
@@ -293,8 +297,11 @@ public class AdNativeView extends FrameLayout {
      *
      * @param nativeAd
      */
-    public void setNativeAd(UnifiedNativeAd nativeAd) {
+    public void setNativeAd(NativeAd nativeAd) {
         this.nativeAd = nativeAd;
+
+        callToActionView.setVisibility(View.VISIBLE);
+        ad_notification.setVisibility(View.VISIBLE);
 
         String store = nativeAd.getStore();
         String advertiser = nativeAd.getAdvertiser();
@@ -360,7 +367,7 @@ public class AdNativeView extends FrameLayout {
      *
      * @return
      */
-    public UnifiedNativeAdView getNativeAdView() {
+    public NativeAdView getNativeAdView() {
         return nativeAdView;
     }
 

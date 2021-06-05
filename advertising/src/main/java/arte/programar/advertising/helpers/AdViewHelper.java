@@ -12,10 +12,10 @@ public class AdViewHelper {
     private static final String TAG = "arte.programar::".concat(AdViewHelper.class.getSimpleName());
 
     // Variable
-    private String mAdKey;
+    private final String mAdKey;
+    private final Context mContext;
+    private final AdRequest mRequest;
     private AdView mAdView;
-    private Context mContext;
-    private AdRequest mRequest;
 
     /**
      * Constructor
@@ -64,6 +64,11 @@ public class AdViewHelper {
      * It is important to mention that the density of the screen (dp) is affected
      * by the orientation and multi-window of the device.
      *
+     * Adaptive Banners
+     * Adaptive banners are the next generation of responsive ads, maximizing performance
+     * by optimizing ad size for each device.
+     * https://developers.google.com/admob/android/banner/adaptive
+     *
      * @return
      */
     private AdSize getAdViewSize() {
@@ -83,15 +88,13 @@ public class AdViewHelper {
         } else if (width >= 640) {
             if (height >= 720) return AdSize.MEDIUM_RECTANGLE;
             else if (height >= 480) return AdSize.LEADERBOARD;
-            else return new AdSize(width, 60);
+            else return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         } else if (width >= 320) {
             if (height >= 720) return AdSize.LARGE_BANNER;
             else if (height >= 480) return AdSize.FULL_BANNER;
-            else if (height >= 320) return new AdSize(height, 50);
-            else return AdSize.SMART_BANNER;
+            else return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         } else {
-            if (height >= 480) return AdSize.SMART_BANNER;
-            else return new AdSize(width, 50);
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         }
     }
 

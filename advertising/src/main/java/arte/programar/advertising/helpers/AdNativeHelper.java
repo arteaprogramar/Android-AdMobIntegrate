@@ -2,9 +2,11 @@ package arte.programar.advertising.helpers;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.nativead.NativeAd;
 
 import arte.programar.advertising.AdNativeView;
 
@@ -20,11 +22,11 @@ public class AdNativeHelper {
      */
     public static void show(final AdNativeView view, String adKey) {
         try {
-            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey).forUnifiedNativeAd(
-                    new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey).forNativeAd(
+                    new NativeAd.OnNativeAdLoadedListener() {
                         @Override
-                        public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                            view.setNativeAd(unifiedNativeAd);
+                        public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
+                            view.setNativeAd(nativeAd);
                         }
                     }
             ).build();
@@ -44,11 +46,11 @@ public class AdNativeHelper {
      */
     public static void show(final AdNativeView view, String adKey, AdRequest request) {
         try {
-            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey).forUnifiedNativeAd(
-                    new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey).forNativeAd(
+                    new NativeAd.OnNativeAdLoadedListener() {
                         @Override
-                        public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                            view.setNativeAd(unifiedNativeAd);
+                        public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
+                            view.setNativeAd(nativeAd);
                         }
                     }
             ).build();

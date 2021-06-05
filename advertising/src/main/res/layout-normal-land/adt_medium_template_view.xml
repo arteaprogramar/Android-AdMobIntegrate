@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.google.android.gms.ads.formats.UnifiedNativeAdView
+    <com.google.android.gms.ads.nativead.NativeAdView
         android:id="@+id/native_ad_view"
         style="@style/AdtTheme"
         android:layout_width="match_parent"
@@ -79,7 +79,8 @@
                             android:gravity="center"
                             android:text="Ad"
                             android:textSize="@dimen/adt_ad_indicator_text_size"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="invisible" />
 
                         <TextView
                             android:id="@+id/secondary"
@@ -123,7 +124,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/adt_gutter_vertical"
-                            android:theme="@style/AdtButtonStyle" />
+                            android:theme="@style/AdtButtonStyle"
+                            android:visibility="gone" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -133,5 +135,6 @@
 
         </RelativeLayout>
 
-    </com.google.android.gms.ads.formats.UnifiedNativeAdView>
+    </com.google.android.gms.ads.nativead.NativeAdView>
+
 </merge>

@@ -6,9 +6,12 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.novoda.merlin.Connectable;
 import com.novoda.merlin.Disconnectable;
 import com.novoda.merlin.Merlin;
@@ -46,9 +49,10 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
         mContent = findViewById(R.id.adc);
 
         // Init Object
-        MobileAds.initialize(getApplication());
+        MobileAds.initialize(this, initializationStatus -> { });
+
         adViewHelper = new AdViewHelper(getApplication(), ID_AD_VIEW);
-        adInterstitialHelper = AdInterstitialHelper.getInstance(getApplication(), ID_AD_INTERSTITIAL);
+        adInterstitialHelper = new AdInterstitialHelper(this, ID_AD_INTERSTITIAL);
     }
 
     @Override
@@ -65,17 +69,15 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
 
     private void adViewLoad() {
         adViewHelper.create();
-        mContent.post(new Runnable() {
-            @Override
-            public void run() {
-                mContent.removeAllViews();
-                mContent.addView(adViewHelper.getAdView());
-            }
+
+        mContent.post(() -> {
+            mContent.removeAllViews();
+            mContent.addView(adViewHelper.getAdView());
         });
     }
 
     private void interstitialLoad() {
-        adInterstitialHelper.show();
+        adInterstitialHelper.showInterstitial();
     }
 
     /**
@@ -85,25 +87,19 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
     public void onConnect() {
         Log.d(TAG, "onConnect()");
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                nativeLoad();
-                adViewLoad();
-                interstitialLoad();
-            }
+        handler.post(() -> {
+            nativeLoad();
+            adViewLoad();
         });
+
+        handler.postDelayed(() -> interstitialLoad(), 5000);
+
     }
 
     @Override
     public void onDisconnect() {
         Log.d(TAG, "onDisconnect()");
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplication(), "Internet not access", Toast.LENGTH_LONG).show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(getApplication(), "Internet not access", Toast.LENGTH_LONG).show());
     }
 
     @Override
@@ -112,6 +108,11 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
 
         registerConnectable(this);
         registerDisconnectable(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override

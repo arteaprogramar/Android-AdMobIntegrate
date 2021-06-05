@@ -1,6 +1,13 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'
+}
+
+def getVersionName = { ->
+    return '3.0.0'
+}
+
+def getArtificatId = { ->
+    return 'advertising'
 }
 
 android {
@@ -29,48 +36,12 @@ task sourceJar(type: Jar) {
 }
 
 
-Properties properties = new Properties()
-properties.load(new FileInputStream(rootProject.file('github.properties')))
-
-def getVersionName = { ->
-    return '2.2104.2'
-}
-
-def getArtificatId = { ->
-    return 'advertising'
-}
-
-publishing {
-    publications {
-        bar(MavenPublication) {
-            groupId 'arte.programar'
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact sourceJar
-            artifact ("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
-        }
-
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/arteaprogramar/Android-AdMobIntegrate")
-
-            credentials {
-                username = properties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = properties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // Android Library
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.3.1'
-    implementation 'com.google.android.gms:play-services-ads:19.8.0'
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
     // Extra library
     implementation 'com.novoda:merlin:1.2.0'
 }
