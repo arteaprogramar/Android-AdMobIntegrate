@@ -16,11 +16,23 @@ Facilitate implementation of "Google AdMob" advertising in an Android Applicatio
 Include library in your project.
 
 ```
+build.gradle (project)
+
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+
+build.gradle (:app)
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     ...
-    implementation 'arte.programar:advertising:2.2104.2'
-    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    implementation 'com.github.arteaprogramar:Android-AdMobIntegrate:3.0.0'
+    implementation 'com.google.android.gms:play-services-ads:20.1.0'
     ...
 }
 
@@ -43,12 +55,12 @@ dependencies {
 - Initialize Mobile Ads SDK
 
 ```
-Java
+Java Lambda
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(...);
 
-    MobileAds.initialize(getApplication());
+    MobileAds.initialize(this, initializationStatus -> { });
 
 }
 
@@ -57,7 +69,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    MobileAds.initialize(this)
+    MobileAds.initialize(this){}
 }
 ```
 
@@ -155,8 +167,8 @@ protected void onCreate(Bundle savedInstanceState) {
     mNativeView = findViewById(R.id.nav);    
     
     // Load and show
-    adInterstitialHelper = AdInterstitialHelper.getInstance(getApplication(), ID_AD_INTERSTITIAL);
-    adInterstitialHelper.show();
+    adInterstitialHelper = new AdInterstitialHelper(this, ID_AD_INTERSTITIAL);
+    adInterstitialHelper.showInterstitial();
 }
 ...
 
@@ -193,10 +205,8 @@ protected void onCreate(Bundle savedInstanceState) {
 
 | Attribute           | Related method(s)        | Parameter          | Default value                     |
 |---------------------|--------------------------|--------------------|-----------------------------------|
-| AdInterstitialHelper  | getInstance()          | Context, AdKey      | required params                   |
-| AdInterstitialHelper  | getInstance()          | Context, AdKey, AdRequest | required params             |
-| AdInterstitialHelper  | show()                 |                     |                                   |
-| AdInterstitialHelper  | destroyInstance()      |                     |                                   |  
+| AdInterstitialHelper  | AdInterstitialHelper() | Activity, AdKey     | required params                   |
+| AdInterstitialHelper  | showInterstitial()     |                     |                                   |
 
 
 
