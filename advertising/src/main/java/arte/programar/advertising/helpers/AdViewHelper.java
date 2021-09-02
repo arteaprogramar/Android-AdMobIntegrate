@@ -86,7 +86,7 @@ public class AdViewHelper {
             else if (height >= 320) return AdSize.LARGE_BANNER;
             else return AdSize.BANNER;
         } else if (width >= 640) {
-            if (height >= 720) return AdSize.MEDIUM_RECTANGLE;
+            if (height >= 720) return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
             else if (height >= 480) return AdSize.LEADERBOARD;
             else return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         } else if (width >= 320) {

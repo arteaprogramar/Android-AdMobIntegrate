@@ -19,7 +19,6 @@ public abstract class ConnectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         merlin = createMerlin();
     }
 

@@ -2,11 +2,8 @@ package arte.programar.advertising.helpers;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.nativead.NativeAd;
 
 import arte.programar.advertising.AdNativeView;
 
@@ -22,14 +19,9 @@ public class AdNativeHelper {
      */
     public static void show(final AdNativeView view, String adKey) {
         try {
-            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey).forNativeAd(
-                    new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
-                            view.setNativeAd(nativeAd);
-                        }
-                    }
-            ).build();
+            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey)
+                    .forNativeAd(view::setNativeAd)
+                    .build();
             loader.loadAd(new AdRequest.Builder().build());
         } catch (Exception ex) {
             Log.w(TAG, ex);
@@ -46,14 +38,9 @@ public class AdNativeHelper {
      */
     public static void show(final AdNativeView view, String adKey, AdRequest request) {
         try {
-            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey).forNativeAd(
-                    new NativeAd.OnNativeAdLoadedListener() {
-                        @Override
-                        public void onNativeAdLoaded(@NonNull NativeAd nativeAd) {
-                            view.setNativeAd(nativeAd);
-                        }
-                    }
-            ).build();
+            AdLoader loader = new AdLoader.Builder(view.getContext(), adKey)
+                    .forNativeAd(view::setNativeAd)
+                    .build();
             loader.loadAd(request);
         } catch (Exception ex) {
             Log.w(TAG, ex);
