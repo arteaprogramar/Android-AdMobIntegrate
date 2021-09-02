@@ -32,7 +32,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     ...
     implementation 'com.github.arteaprogramar:Android-AdMobIntegrate:3.1.0'
-    implementation 'com.google.android.gms:play-services-ads:20.1.0'
+    implementation 'com.google.android.gms:play-services-ads:20.3.0'
     ...
 }
 

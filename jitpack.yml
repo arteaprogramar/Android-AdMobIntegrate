@@ -1,5 +1,4 @@
 before_install:
-  - yes | sdkmanager --install "ndk;21.4.7075529" "build-tools;30.0.3" "platforms;android-30"
   - sdk install java 11.0.10-open
   - sdk use java 11.0.10-open
 jdk:
