@@ -141,7 +141,7 @@ public class AdNativeView extends FrameLayout {
 
     private void setAdSubtitle(String adSubtitle) {
         if (adSubtitle == null) {
-            this.adSubtitle = "Programming is Art. Programming is life.";
+            this.adSubtitle = "Dear user, thank you for using our application. We work very hard for you.";
         } else {
             this.adSubtitle = adSubtitle;
         }
