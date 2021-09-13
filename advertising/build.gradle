@@ -4,8 +4,8 @@ plugins {
 }
 
 def _group = 'arte.programar'
-def _version = '3.1.0'
-def _versioncode = 4
+def _version = '3.2.0'
+def _versioncode = 5
 def _artifact = 'advertising'
 
 afterEvaluate {
@@ -26,6 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 31
+        versionName _version
+        versionCode _versioncode
         consumerProguardFiles "consumer-rules.pro"
     }
     buildTypes {
@@ -37,14 +39,16 @@ android {
     lintOptions {
         resourcePrefix 'adt_'
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
 }
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier 'sources'
 }
-
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // Android Library
