@@ -63,7 +63,7 @@ public class AdViewHelper {
      * <p>
      * It is important to mention that the density of the screen (dp) is affected
      * by the orientation and multi-window of the device.
-     *
+     * <p>
      * Adaptive Banners
      * Adaptive banners are the next generation of responsive ads, maximizing performance
      * by optimizing ad size for each device.
@@ -86,7 +86,8 @@ public class AdViewHelper {
             else if (height >= 320) return AdSize.LARGE_BANNER;
             else return AdSize.BANNER;
         } else if (width >= 640) {
-            if (height >= 720) return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
+            if (height >= 720)
+                return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
             else if (height >= 480) return AdSize.LEADERBOARD;
             else return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         } else if (width >= 320) {

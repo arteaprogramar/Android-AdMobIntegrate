@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
@@ -20,7 +19,6 @@ public class AdInterstitialHelper {
     private final String mAdKey;
     private final Activity mActivity;
     private final AdRequest mRequest;
-    private final MutableLiveData<Boolean> showInterstitial = new MutableLiveData<>(false);
     private InterstitialAd mInterstitial;
 
     /**
@@ -33,7 +31,6 @@ public class AdInterstitialHelper {
         this.mAdKey = adKey;
         this.mActivity = activity;
         this.mRequest = new AdRequest.Builder().build();
-
         load();
     }
 
@@ -52,13 +49,11 @@ public class AdInterstitialHelper {
                     @Override
                     public void onAdDismissedFullScreenContent() {
                         AdInterstitialHelper.this.mInterstitial = null;
-                        setShowInterstitial(false);
                     }
 
                     @Override
                     public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                         AdInterstitialHelper.this.mInterstitial = null;
-                        setShowInterstitial(false);
                     }
 
                     @Override
@@ -75,7 +70,6 @@ public class AdInterstitialHelper {
                 Log.i(TAG, "onAdFailedToLoad() : ".concat(loadAdError.getMessage()));
                 Log.i(TAG, String.format("domain: %s, code: %d, message: %s", loadAdError.getDomain(), loadAdError.getCode(), loadAdError.getMessage()));
                 mInterstitial = null;
-                setShowInterstitial(false);
             }
 
         });
@@ -89,17 +83,9 @@ public class AdInterstitialHelper {
 
         if (mInterstitial != null) {
             mInterstitial.show(mActivity);
-            setShowInterstitial(true);
         } else {
             load();
         }
     }
 
-    public MutableLiveData<Boolean> getShowInterstitial() {
-        return showInterstitial;
-    }
-
-    private void setShowInterstitial(Boolean isVisible) {
-        this.showInterstitial.postValue(isVisible);
-    }
 }

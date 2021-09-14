@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +22,8 @@ import com.google.android.gms.ads.nativead.MediaView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.google.android.gms.ads.nativead.NativeAd.Image;
 import com.google.android.gms.ads.nativead.NativeAdView;
+
+import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 
 /**
@@ -51,7 +52,7 @@ public class AdNativeView extends FrameLayout {
     private NativeAdView nativeAdView;
     private TextView primaryView;
     private TextView secondaryView;
-    private RatingBar ratingBar;
+    private MaterialRatingBar ratingBar;
     private TextView tertiaryView;
     private ImageView iconView;
     private MediaView mediaView;

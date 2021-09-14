@@ -19,7 +19,6 @@ import arte.programar.advertising.helpers.AdNativeHelper;
 import arte.programar.advertising.helpers.AdViewHelper;
 import arte.programar.network.ConnectionActivity;
 
-
 public class MainActivity extends ConnectionActivity implements Connectable, Disconnectable {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String ID_AD_NATIVE = "ca-app-pub-3940256099942544/2247696110";
@@ -35,7 +34,7 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
     private AdInterstitialHelper adInterstitialHelper;
 
     // Thread
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private final Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

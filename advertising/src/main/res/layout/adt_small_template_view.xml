@@ -77,7 +77,7 @@
                             android:text="Ad"
                             android:textSize="@dimen/adt_ad_indicator_text_size"
                             android:textStyle="bold"
-                            android:visibility="invisible" />
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/secondary"
@@ -90,9 +90,9 @@
 
                     </RelativeLayout>
 
-                    <RatingBar
+                    <me.zhanghai.android.materialratingbar.MaterialRatingBar
                         android:id="@+id/rating_bar"
-                        style="@style/Widget.AppCompat.RatingBar"
+                        style="@style/Widget.MaterialRatingBar.RatingBar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@id/ad_notification_view"
