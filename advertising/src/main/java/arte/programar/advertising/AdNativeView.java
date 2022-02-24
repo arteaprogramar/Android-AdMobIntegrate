@@ -25,7 +25,6 @@ import com.google.android.gms.ads.nativead.NativeAdView;
 
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
-
 /**
  * Base class for a template view. *
  */

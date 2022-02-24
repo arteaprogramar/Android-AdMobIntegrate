@@ -68,8 +68,8 @@
 
                         <TextView
                             android:id="@+id/ad_notification_view"
-                            android:layout_width="@dimen/adt_ad_indicator_width"
-                            android:layout_height="@dimen/adt_ad_indicator_height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/adt_gutter_horizontal"
                             android:layout_marginRight="@dimen/adt_gutter_horizontal"
@@ -78,7 +78,7 @@
                             android:text="Ad"
                             android:textSize="@dimen/adt_ad_indicator_text_size"
                             android:textStyle="bold"
-                            android:visibility="invisible" />
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/secondary"

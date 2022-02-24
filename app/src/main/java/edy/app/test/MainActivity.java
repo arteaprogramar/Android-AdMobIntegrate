@@ -12,14 +12,14 @@ import com.google.android.gms.ads.MobileAds;
 import com.novoda.merlin.Connectable;
 import com.novoda.merlin.Disconnectable;
 import com.novoda.merlin.Merlin;
+import com.novoda.merlin.helper.MerlinActivity;
 
 import arte.programar.advertising.AdNativeView;
 import arte.programar.advertising.helpers.AdInterstitialHelper;
 import arte.programar.advertising.helpers.AdNativeHelper;
 import arte.programar.advertising.helpers.AdViewHelper;
-import arte.programar.network.ConnectionActivity;
 
-public class MainActivity extends ConnectionActivity implements Connectable, Disconnectable {
+public class MainActivity extends MerlinActivity implements Connectable, Disconnectable {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String ID_AD_NATIVE = "ca-app-pub-3940256099942544/2247696110";
     private static final String ID_AD_VIEW = "ca-app-pub-3940256099942544/6300978111";
@@ -45,57 +45,11 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
         mContent = findViewById(R.id.adc);
 
         // Init Object
-        MobileAds.initialize(this, initializationStatus -> { });
+        MobileAds.initialize(this, initializationStatus -> {
+        });
 
         adViewHelper = new AdViewHelper(getApplication(), ID_AD_VIEW);
         adInterstitialHelper = new AdInterstitialHelper(this, ID_AD_INTERSTITIAL);
-    }
-
-    @Override
-    protected Merlin createMerlin() {
-        return new Merlin.Builder()
-                .withConnectableCallbacks()
-                .withDisconnectableCallbacks()
-                .build(getApplicationContext());
-    }
-
-    private void nativeLoad() {
-        AdNativeHelper.show(mNativeView, ID_AD_NATIVE);
-    }
-
-    private void adViewLoad() {
-        adViewHelper.create();
-
-        mContent.post(() -> {
-            mContent.removeAllViews();
-            mContent.addView(adViewHelper.getAdView());
-        });
-    }
-
-    private void interstitialLoad() {
-        adInterstitialHelper.showInterstitial();
-    }
-
-    /**
-     * Access to Internet (Ads Load)
-     */
-    @Override
-    public void onConnect() {
-        Log.d(TAG, "onConnect()");
-
-        handler.post(() -> {
-            nativeLoad();
-            adViewLoad();
-        });
-
-        handler.postDelayed(() -> interstitialLoad(), 5000);
-
-    }
-
-    @Override
-    public void onDisconnect() {
-        Log.d(TAG, "onDisconnect()");
-        runOnUiThread(() -> Toast.makeText(getApplication(), "Internet not access", Toast.LENGTH_LONG).show());
     }
 
     @Override
@@ -116,5 +70,48 @@ public class MainActivity extends ConnectionActivity implements Connectable, Dis
         AdNativeHelper.destroy(mNativeView);
         adViewHelper.onDestroy();
         super.onDestroy();
+    }
+
+    @Override
+    protected Merlin createMerlin() {
+        return new Merlin.Builder()
+                .withConnectableCallbacks()
+                .withDisconnectableCallbacks()
+                .build(getApplicationContext());
+    }
+
+    @Override
+    public void onConnect() {
+        Log.d(TAG, "onConnect()");
+
+        handler.post(() -> {
+            nativeLoad();
+            adViewLoad();
+        });
+
+        handler.postDelayed(this::interstitialLoad, 3000);
+    }
+
+    @Override
+    public void onDisconnect() {
+        Log.d(TAG, "onDisconnect()");
+        runOnUiThread(() -> Toast.makeText(getApplication(), "Internet not access", Toast.LENGTH_LONG).show());
+    }
+
+    private void nativeLoad() {
+        AdNativeHelper.show(mNativeView, ID_AD_NATIVE);
+    }
+
+    private void adViewLoad() {
+        adViewHelper.create();
+
+        mContent.post(() -> {
+            mContent.removeAllViews();
+            mContent.addView(adViewHelper.getAdView());
+        });
+    }
+
+    private void interstitialLoad() {
+        adInterstitialHelper.showInterstitial();
     }
 }

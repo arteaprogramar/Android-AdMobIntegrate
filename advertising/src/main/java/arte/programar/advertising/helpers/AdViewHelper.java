@@ -4,11 +4,15 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 
-public class AdViewHelper {
+public class AdViewHelper extends AdListener {
     private static final String TAG = "arte.programar::".concat(AdViewHelper.class.getSimpleName());
 
     // Variable
@@ -51,9 +55,22 @@ public class AdViewHelper {
             mAdView.setAdSize(getAdViewSize());
             mAdView.setAdUnitId(mAdKey);
             mAdView.loadAd(mRequest);
+            mAdView.setAdListener(this);
         } catch (Exception ex) {
             Log.w(TAG, ex);
         }
+    }
+
+    @Override
+    public void onAdLoaded() {
+        super.onAdLoaded();
+        Log.w(TAG, "onAdLoaded()");
+    }
+
+    @Override
+    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+        super.onAdFailedToLoad(loadAdError);
+        Log.w(TAG, "onAdFailedToLoad() ".concat(loadAdError.toString()));
     }
 
     /**

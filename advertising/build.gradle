@@ -4,8 +4,8 @@ plugins {
 }
 
 def _group = 'arte.programar'
-def _version = '3.4.0'
-def _versioncode = 6
+def _version = '4.0.0'
+def _versioncode = 7
 def _artifact = 'advertising'
 
 afterEvaluate {
@@ -22,12 +22,10 @@ afterEvaluate {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 31
-        versionName _version
-        versionCode _versioncode
+        targetSdkVersion 32
         consumerProguardFiles "consumer-rules.pro"
     }
     buildTypes {
@@ -35,9 +33,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-    lintOptions {
-        resourcePrefix 'adt_'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -53,8 +48,7 @@ task sourceJar(type: Jar) {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     // Android Library
-    implementation 'com.google.android.gms:play-services-ads:20.3.0'
-    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
     // Extra library
-    implementation 'com.novoda:merlin:1.2.0'
+    implementation 'me.zhanghai.android.materialratingbar:library:1.4.0'
 }
