@@ -4,8 +4,8 @@ plugins {
 }
 
 def _group = 'arte.programar'
-def _version = '4.0.0'
-def _versioncode = 7
+def _version = '4.0.1'
+def _versioncode = 8
 def _artifact = 'advertising'
 
 afterEvaluate {

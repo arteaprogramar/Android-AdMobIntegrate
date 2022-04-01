@@ -108,8 +108,7 @@ public class AdViewHelper extends AdListener {
             else if (height >= 480) return AdSize.LEADERBOARD;
             else return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         } else if (width >= 320) {
-            if (height >= 720) return AdSize.LARGE_BANNER;
-            else if (height >= 480) return AdSize.FULL_BANNER;
+            if (height >= 720) return AdSize.FULL_BANNER;
             else return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
         } else {
             return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(mContext, width);
