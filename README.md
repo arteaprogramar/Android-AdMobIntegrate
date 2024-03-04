@@ -31,7 +31,7 @@ build.gradle (:app)
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     ...
-    implementation 'com.github.arteaprogramar:Android-AdMobIntegrate:4.1.5'
+    implementation 'com.github.arteaprogramar:Android-AdMobIntegrate:4.1.6'
     implementation 'com.google.android.gms:play-services-ads:22.6.0'
     ...
 }
