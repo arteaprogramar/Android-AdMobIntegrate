@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 32
+    namespace 'edy.app.test'
+    compileSdk 34
     defaultConfig {
         applicationId "edy.app.admob"
-        minSdkVersion 16
-        targetSdkVersion 32
+        minSdkVersion 21
+        targetSdk 34
         versionCode 1
         versionName "1.0"
     }
@@ -19,8 +20,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'com.google.android.gms:play-services-ads:20.6.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation project(':advertising')
     implementation 'com.github.arteaprogramar:Android-Merlin:2.1.0'
     //implementation 'com.github.arteaprogramar:Android-AdMobIntegrate:3.0.0'
