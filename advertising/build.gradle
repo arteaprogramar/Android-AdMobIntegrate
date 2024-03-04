@@ -14,12 +14,14 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdk 34
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'consumer-rules.pro'
         }
     }
     compileOptions {
@@ -28,6 +30,18 @@ android {
     }
 }
 
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = _group
+            artifactId = _artifact
+            version = _version
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
 
 tasks.register('sourceJar') {
     from android.sourceSets.main.java.srcDirs
